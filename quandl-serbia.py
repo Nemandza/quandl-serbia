@@ -8,10 +8,11 @@ Created on Tue Feb 09 10:00:01 2016
 import Quandl
 import matplotlib.pyplot as plt
 
-
+# Sve od 2015 do 2020 su predikcije
 end_year = '2016-12-31'
 EUR = 120.0
 
+## Ucitavanje datasetova preko Quandl API-ja (sifre datasetova dostupne na Quandl.com)
 rs_gdp_const = Quandl.get('ODA/SRB_NGDP_R')
 rs_gov_rev = Quandl.get('ODA/SRB_GGR')
 rs_gov_balance = Quandl.get('ODA/SRB_GGSB')
@@ -19,6 +20,8 @@ rs_unemp = Quandl.get('ODA/SRB_LUR')
 rs_debt_gross = Quandl.get('ODA/SRB_GGXWDG')
 rs_debt_net = Quandl.get('ODA/SRB_GGXWDN')
 debt_vs_gdp = rs_debt_gross.join(rs_gdp_const, lsuffix='_Balance', rsuffix='_GDP')
+
+## Plotovanje
 
 plt.figure(1)
 plt.plot(rs_gdp_const.iloc[rs_gdp_const.index < end_year]/EUR)
@@ -58,4 +61,3 @@ plt.ylabel('Milijardi EUR')
 plt.annotate('@baskervilski', xy=(0.95, 0.05), xycoords='axes fraction',
              fontsize=16, alpha = 0.6,
              horizontalalignment='right', verticalalignment='bottom')
-plt.show()
